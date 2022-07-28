@@ -34,3 +34,6 @@ build/
 
 ### Custom ###
 *.help
+
+# env file
+.env
