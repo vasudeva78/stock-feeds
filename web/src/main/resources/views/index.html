@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feed</title>
+</head>
+<body>
+<section>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2">Feeds</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${feeds.empty}">
+            <td colspan="2"> No feeds available...</td>
+        </tr>
+        <tr th:each="stockfeed, stat : ${feeds}">
+            <td style="border: 2px solid black;padding: 10px;text-align: center;font-size: 150%;">
+                <span th:text="${stat.count}"/>
+            </td>
+            <td style="border: 2px solid black;padding: 10px;text-align: center;font-size: 150%;">
+                <a th:href="${stockfeed.url}" target="_blank">
+                    <span th:text="${stockfeed.text}"/>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

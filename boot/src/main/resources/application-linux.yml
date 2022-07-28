@@ -1,0 +1,23 @@
+micronaut:
+  application:
+    name: Stocks
+#  server:
+#    8081
+---
+netty:
+  default:
+    allocator:
+      max-order: 3
+---
+datasources:
+  default:
+    url: 'jdbc:h2:tcp://localhost//home/pi/h2-database/h2-2022-06-13/h2/bin/stocks;MODE=MySQL'
+    username: 'sa'
+    password: ''
+    dialect: H2
+    driverClassName: 'org.h2.Driver'
+---
+flyway:
+  datasources:
+    default:
+      enabled: true

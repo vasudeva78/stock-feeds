@@ -1,0 +1,1 @@
+create index stockfeed_indx_feeddate on stockfeed(country, feeddate);
