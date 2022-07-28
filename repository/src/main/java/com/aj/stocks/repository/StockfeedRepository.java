@@ -18,7 +18,7 @@ public interface StockfeedRepository extends PageableRepository<Stockfeed, Integ
   Optional<Stockfeed> saveIfNotExists(String text, String url, String country, Timestamp feeddate);
 
   @Query(
-      "select id, text, url, feeddate, country from stockfeed where country = :country order by feeddate desc limit 10")
+      "select id, text, url, feeddate, country from stockfeed where country = :country order by feeddate desc")
   List<Stockfeed> findAllStockFeeds(String country);
 
   @Query("delete from stockfeed where datediff(d,feeddate, current_timestamp) <= 7")
