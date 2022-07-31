@@ -33,10 +33,11 @@ feeds Google alerts have been documented in the .env file. The file has been omi
 * Run unit tests & build project : `mvn clean package -T 8`
 * Start H2 Database (Windows) : `java -Xms16m -Xmx16m -XX:+UseG1GC -cp h2-2.1.214.jar org.h2.tools.Server`
 * Start H2 Database (Linux) : `nohup java -Xms16m -Xmx16m -XX:+UseG1GC -cp h2-2.1.214.jar org.h2.tools.Server`
-* Run executable jar (
+* Run stock feed executable jar (
   Windows) : `nohup java -Xms64m -Xmx64m -Dmicronaut.environments=windows -XX:+UseConcMarkSweepGC -jar stock-feeds.jar`
-* Rune executable jar (
+* Run stock feed executable jar (
   Linux) : `nohup java -Xms64m -Xmx64m -Dmicronaut.environments=linux -XX:+UseConcMarkSweepGC -jar stock-feeds.jar`
+* Shell script (Linux) : `nohup ./stock-feed-start-up.sh`
 
 Cheers ...
 <br/><br/><img src="https://media.giphy.com/media/1BhVFK6ejcQV86UtHl/giphy.gif" width="100"/>
