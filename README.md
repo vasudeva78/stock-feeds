@@ -14,9 +14,10 @@ Micronaut is a JVM-based full-stack framework used to build modular microservice
 * Compile-time dependency injection for inline bytecode generation
 * Less CPU & memory resource utilizations
 
-The codebase is built on Micronaut to collate interested RSS feeds and render a webpage view from server side, itself.
-The RSS
-feeds Google alerts have been documented in the .env file. The file has been omitted in the repository, though.
+The codebase is built on Micronaut to collate interested stock RSS feeds and render a webpage view from server side,
+itself.
+The RSS feeds Google alert urls are in the .env file delimited by '|'. The file has been omitted in the
+repository, though.
 
 # Features implemented
 
@@ -31,13 +32,17 @@ feeds Google alerts have been documented in the .env file. The file has been omi
 # Commands
 
 * Run unit tests & build project : `mvn clean package -T 8`
-* Start H2 Database (Windows) : `java -Xms16m -Xmx16m -XX:+UseG1GC -cp h2-2.1.214.jar org.h2.tools.Server`
-* Start H2 Database (Linux) : `nohup java -Xms16m -Xmx16m -XX:+UseG1GC -cp h2-2.1.214.jar org.h2.tools.Server`
+* Start H2 Database (Windows) : `java -Xms16m -Xmx16m -Xss512k -XX:+UseG1GC -cp h2-2.1.214.jar org.h2.tools.Server`
+* Start H2 Database (Linux) : `nohup java -Xms16m -Xmx16m -Xss512k -XX:+UseG1GC -cp h2-2.1.214.jar org.h2.tools.Server`
 * Run stock feed executable jar (
-  Windows) : `nohup java -Xms64m -Xmx64m -Dmicronaut.environments=windows -XX:+UseConcMarkSweepGC -jar stock-feeds.jar`
+  Windows) : `nohup java -Xms64m -Xmx64m -Xss512k -Dmicronaut.environments=windows -XX:+UseConcMarkSweepGC -jar stock-feeds.jar`
 * Run stock feed executable jar (
-  Linux) : `nohup java -Xms64m -Xmx64m -Dmicronaut.environments=linux -XX:+UseConcMarkSweepGC -jar stock-feeds.jar`
+  Linux) : `nohup java -Xms64m -Xmx64m -Xss512k -Dmicronaut.environments=linux -XX:+UseConcMarkSweepGC -jar stock-feeds.jar`
 * Shell script (Linux) : `nohup ./stock-feed-start-up.sh`
+* Raspberry Pi startup script :
+    * Edit crontab : `crontab -e`
+    * Add line : `@reboot /home/pi/stock-feeds/stock-feed-start-up.sh >/dev/null 2>&1`
+    * Reboot : `sudo reboot`
 
 Cheers ...
 <br/><br/><img src="https://media.giphy.com/media/1BhVFK6ejcQV86UtHl/giphy.gif" width="100"/>
