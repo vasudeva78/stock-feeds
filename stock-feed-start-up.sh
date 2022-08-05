@@ -7,4 +7,4 @@ sleep 20s
 
 cd /home/pi/stock-feeds/
 rm *.out
-java -Xms64m -Xmx64m -Xss512k -XX:+UseConcMarkSweepGC -Dmicronaut.environments=linux -jar stock-feeds.jar &
+java -Xms32m -Xmx32m -Xss512k -XX:+UseConcMarkSweepGC -Dmicronaut.environments=linux -jar stock-feeds.jar &
