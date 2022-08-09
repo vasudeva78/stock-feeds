@@ -1,10 +1,10 @@
 #!/bin/sh
 cd /home/pi/h2-database/h2-2022-06-13/h2/bin
 rm *.out
-java -Xms16m -Xmx16m -Xss512k -XX:+UseConcMarkSweepGC -cp h2-2.1.214.jar org.h2.tools.Server -tcp &
+java -Xms16m -Xmx16m -Xss512k -XX:+UseSerialGC -cp h2-2.1.214.jar org.h2.tools.Server -tcp &
 
 sleep 20s
 
 cd /home/pi/stock-feeds/
 rm *.out
-java -Xms32m -Xmx32m -Xss512k -XX:+UseConcMarkSweepGC -Dmicronaut.environments=linux -jar stock-feeds.jar &
+java -Xms32m -Xmx32m -Xss512k -XX:+UseSerialGC -Dmicronaut.environments=linux -jar stock-feeds.jar &

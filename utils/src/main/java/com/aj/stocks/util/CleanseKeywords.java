@@ -2,8 +2,6 @@ package com.aj.stocks.util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-
 public class CleanseKeywords {
 
   private static final String[] htmlTags = new String[] {"<b>", "</b>"};
@@ -15,25 +13,23 @@ public class CleanseKeywords {
         "small-cap",
         "shareholder",
         "dividend",
-        "dividend paying",
+        "paying",
         "announce",
         "multibagger",
         "promoter",
         "holding",
-        "spinoff",
+        "spin off",
         "bonus",
         "demerger",
-        "split"
+        "split",
+        "below rs",
+        "under rs",
+        "below £",
+        "under £"
       };
 
   public static boolean containsKeywords(String input) {
-    String isPresent =
-        Arrays.stream(textSeachKeywords)
-            .filter(keyword -> StringUtils.containsAnyIgnoreCase(trimHtmlTags(input), keyword))
-            .findFirst()
-            .orElse("notFound");
-
-    return isPresent.equals("notFound") ? false : true;
+    return StringUtils.containsAnyIgnoreCase(input, textSeachKeywords);
   }
 
   public static String trimHtmlTags(String input) {
