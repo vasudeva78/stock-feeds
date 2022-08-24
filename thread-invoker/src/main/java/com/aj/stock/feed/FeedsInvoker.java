@@ -9,15 +9,18 @@ import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import io.micronaut.scheduling.annotation.Scheduled;
 import jakarta.inject.Singleton;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 @Singleton
 @ExecuteOn(TaskExecutors.SCHEDULED)
@@ -79,7 +82,7 @@ public class FeedsInvoker {
                   try {
                     return futureFeed.get(executionTimeoutInSeconds, TimeUnit.SECONDS).stream();
                   } catch (Exception e) {
-                    log.error("Error while getting all feeds ... ", e);
+                    log.error("Error while getting all feeds ... ", feedThreadsList, e);
                   }
                   return null;
                 })

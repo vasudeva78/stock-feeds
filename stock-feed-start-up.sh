@@ -7,4 +7,4 @@ sleep 20s
 
 cd /home/pi/stock-feeds/
 rm *.out
-java -Xms32m -Xmx32m -Xss512k -XX:+UseSerialGC -Dmicronaut.environments=linux -jar stock-feeds.jar &
+java -Xms32m -Xmx32m -Xss512k -XX:+UseSerialGC -Dmicronaut.environments=linux -Dhttps.protocols=TLSv1.1,TLSv1.2 -jar stock-feeds.jar &
