@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_FILE_NAME" value="application"/>
+  <property name="LOG_FILE_NAME" value="application"/>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M [line:%L] - %msg%n</pattern>
-        </encoder>
-    </appender>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M [line:%L] -
+        %msg%n
+      </pattern>
+    </encoder>
+  </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>./${LOG_FILE_NAME}.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>./${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <!-- each archived file's size will be max 1MB -->
-            <maxFileSize>1MB</maxFileSize>
-            <!-- 7 days to keep -->
-            <maxHistory>7</maxHistory>
-            <!-- total size of all archive files, if total size > 2MB, it will delete old archived file -->
-            <totalSizeCap>2MB</totalSizeCap>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>1MB</maxFileSize>
-        </triggeringPolicy>
-        <encoder>
-            <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M [line:%L] - %msg%n</pattern>
-        </encoder>
-    </appender>
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>./${LOG_FILE_NAME}.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>./${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <!-- each archived file's size will be max 1MB -->
+      <maxFileSize>1MB</maxFileSize>
+      <!-- 7 days to keep -->
+      <maxHistory>7</maxHistory>
+      <!-- total size of all archive files, if total size > 2MB, it will delete old archived file -->
+      <totalSizeCap>2MB</totalSizeCap>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>1MB</maxFileSize>
+    </triggeringPolicy>
+    <encoder>
+      <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M [line:%L] -
+        %msg%n
+      </pattern>
+    </encoder>
+  </appender>
 
-    <root level="info">
-        <appender-ref ref="STDOUT"/>
-    </root>
-    <root level="error">
-        <appender-ref ref="FILE"/>
-    </root>
+  <root level="error">
+    <appender-ref ref="STDOUT"/>
+  </root>
+  <root level="error">
+    <appender-ref ref="FILE"/>
+  </root>
 </configuration>

@@ -4,6 +4,7 @@ import com.aj.stocks.bean.Stockfeed;
 import com.aj.stocks.thread.FeedThread;
 import com.aj.stocks.util.CleanseKeywords;
 import com.aj.stocks.util.TimestampConverters;
+import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
@@ -24,6 +25,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 @Slf4j
 public class StockFeedThread implements FeedThread {
@@ -64,14 +66,15 @@ public class StockFeedThread implements FeedThread {
         HttpRequest.newBuilder()
             .GET()
             .uri(URI.create(feedUrl))
-            .header("Content-Type", "application/xml")
+            .header("Content-Type", "text/xml; charset=UTF-8")
             .timeout(Duration.ofMinutes(1))
             .build();
 
     HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     String xmlFeedResponse = response.body();
 
-    Document document = dbf.newDocumentBuilder().parse(xmlFeedResponse);
+    Document document =
+        dbf.newDocumentBuilder().parse(new InputSource(new StringReader(xmlFeedResponse)));
     NodeList entryNodes = document.getElementsByTagName("entry");
 
     for (int i = 0; i < entryNodes.getLength(); i++) {

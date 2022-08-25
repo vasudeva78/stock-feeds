@@ -48,6 +48,9 @@ public class FeedsInvoker {
   // At every 1 minute.
   //  @Scheduled(cron = "*/1 * * * *")
 
+  // At every 5 minute.
+  //  @Scheduled(cron = "*/5 * * * *")
+
   @Scheduled(cron = "0 */6 * * *")
   void callAllFeeds() throws Exception {
     String[] indiaFeedUrls = StringUtils.split(dotenv.get("indiaFeedUrls", ""), "|");
