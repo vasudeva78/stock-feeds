@@ -17,9 +17,9 @@ public class DatabaseCleanupInvoker {
     this.stockfeedRepository = stockfeedRepository;
   }
 
-  // At 00:00 every Sunday
-  @Scheduled(cron = "0 0 * * 0")
-  void callAllFeeds() throws Exception {
+  // At 00:30 every Sunday
+  @Scheduled(cron = "30 0 * * SUN")
+  void deleteAllFeeds() throws Exception {
     stockfeedRepository.deleteStockFeedsOlderThan7Days();
   }
 }

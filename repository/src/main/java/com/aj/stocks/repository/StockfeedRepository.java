@@ -5,7 +5,6 @@ import io.micronaut.data.annotation.Query;
 import io.micronaut.data.jdbc.annotation.JdbcRepository;
 import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.repository.PageableRepository;
-
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +20,6 @@ public interface StockfeedRepository extends PageableRepository<Stockfeed, Integ
       "select id, text, url, feeddate, country from stockfeed where country = :country order by feeddate desc")
   List<Stockfeed> findAllStockFeeds(String country);
 
-  @Query("delete from stockfeed where datediff(d,feeddate, current_timestamp) <= 7")
+  @Query("delete from stockfeed where datediff(d, feeddate, current_timestamp) >= 7")
   void deleteStockFeedsOlderThan7Days();
 }
